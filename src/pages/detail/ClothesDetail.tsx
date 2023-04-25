@@ -5,6 +5,8 @@ import styled from "styled-components"
 import { clothes } from "../../data/data"
 import BasketModal from "./BasketModal"
 import SizeAlert from "./SizeAlert";
+import { useDispatch } from "react-redux";
+import { ADD } from "../../store";
 
 export interface clothesOptionType {
   color:string,
@@ -14,6 +16,8 @@ export interface clothesOptionType {
 
 const ClothesDetail = () => {
   const clothId = useParams().id
+  const dispatch = useDispatch()
+
   const filteredClothes = clothes.filter(item => item.id === clothId)[0]
   const [isDisplayingModal,setIsDisplayingModal] = useState(false)
   const [isDisplayingSizeAlert,setIsDisplayingSizeAlert] = useState(false)
@@ -23,8 +27,12 @@ const ClothesDetail = () => {
     count:1
   })
 
-  const displayModal = () => {
-    clothesOption.size ? setIsDisplayingModal(true) : setIsDisplayingSizeAlert(true)
+  const handleBasketClick = () => {
+    if(clothesOption.size !==null){
+      const productInfo = {...filteredClothes,...clothesOption}
+      dispatch(ADD({productInfo}))
+      setIsDisplayingModal(true)
+    }
   }
 
   const handleChangeOption = useCallback((e:React.ChangeEvent <HTMLInputElement | HTMLSelectElement>) => {
@@ -81,7 +89,7 @@ const ClothesDetail = () => {
             <option value={9}>9</option>
             <option value={10}>10</option>
           </Count>
-          <BasketButton onClick = {displayModal}>장바구니에 추가 - {filteredClothes.price}원</BasketButton>
+          <BasketButton onClick = {handleBasketClick}>장바구니에 추가 - {filteredClothes.price}원</BasketButton>
         </BasketArea>
 
       </ClothesInfo>

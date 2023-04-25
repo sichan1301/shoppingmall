@@ -42,7 +42,7 @@ const BasketModal = ({setIsDisplayingModal,filteredClothes,clothesOption}:Basket
           <Option>금액 830,000원</Option>
           {/* store 완성되면 고칠 것  */}
           
-          <Basket><Link to ="/basket">장바구니 보기</Link></Basket>
+          <StyledLink to ="/basket">장바구니 보기</StyledLink>
           <Shopping onClick ={handleButtonClick}>쇼핑 계속하기</Shopping>
         </PriceArea>
       </Wrapper>
@@ -111,20 +111,25 @@ const PriceArea = styled.div`
   width:40%;
 `
 
-const Basket = styled.button`
+const StyledLink = styled(Link)`
   background-color: #dd0606;
   border-radius: 5px;
   font-size: 16px;
   height:50px;
   margin-bottom:5px;
   font-weight: 700;
-  a{
+  color:#fff;
+  text-align:center;
+  line-height:50px;
+  :visited{
     color:#fff;
   }
 `
 
-const Shopping = styled(Basket)`
-  color:black;
-  background-color: #fff;
+const Shopping = styled.button`
+  font-size: 16px;
+  font-weight: 700;
+  height:50px;
+  border-radius: 5px;
   border:0.5px solid black;
 `

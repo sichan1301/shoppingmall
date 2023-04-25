@@ -1,29 +1,36 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
-
-interface CounterState {
-  value: number
+export interface basketType {
+  category:string,
+  color:string,
+  count:number,
+  id:string,
+  imgSrc:string,
+  name:string,
+  price:number,
+  size:string
 }
 
-const initialState = { value: 0 } as CounterState
+interface stateType {
+  basket:basketType[]
+}
 
 const basket = createSlice({
   name: 'basket',
-  initialState,
+  initialState:{
+    basket:[]
+  },
   reducers: {
-    increment(state) {
-      state.value++
+    ADD:(state:stateType,action) => {
+      state.basket.push(action.payload.productInfo)
     },
-    decrement(state) {
-      state.value--
-    },
-    incrementByAmount(state, action) {
-      state.value += action.payload
-    },
+    DELETE:(state:stateType,action)=>{
+
+    }
   },
 })
 
-export const { increment, decrement, incrementByAmount } = basket.actions
+export const { ADD, DELETE } = basket.actions
 
 export type RootState = ReturnType<typeof store.getState>
 
