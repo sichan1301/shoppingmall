@@ -1,18 +1,25 @@
 import styled from "styled-components"
-import { clothes } from "../../../data/data"
 import { clothesType } from "../../../data/dataType"
 
 interface HeaderProps {
-  categoryFilteredClothesList:clothesType[]
+  filteredClothesList:clothesType[],
+  currentPriceSort:string
+  setCurrentPriceSort(value:string):void
 }
-const Header = ({categoryFilteredClothesList}:HeaderProps) => {
+
+const Header = ({filteredClothesList,currentPriceSort,setCurrentPriceSort}:HeaderProps) => {
+
+  const handleChange = (e:React.ChangeEvent <HTMLSelectElement>) => {
+    setCurrentPriceSort(e.target.value)
+  }
+
   return(
     <Container>
-      <Count>{categoryFilteredClothesList.length}개 제품</Count>
-      <Sort>정렬 </Sort>
-      <Select>
-        <option value ="">가격 높은순</option>
-        <option value ="">가격 낮은순</option>
+      <Count>{filteredClothesList.length}개 제품</Count>
+      <Sort>정렬</Sort>
+      <Select onChange = {handleChange} value = {currentPriceSort}>
+        <option value ="가격 높은순">가격 높은순</option>
+        <option value ="가격 낮은순">가격 낮은순</option>
       </Select>
     </Container>
   )
