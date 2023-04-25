@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { clothes } from "../../data/data"
 import Cateogry from "./Category"
 import ClothesList from "./clothesList/ClothesList"
-import Header from "./clothesList/header"
+import Header from "./clothesList/clothesListheader"
 
 const Home = () => {
   const [currentCategory,setCurrentCategory] = useState("전체")
@@ -37,10 +37,11 @@ const Container = styled.main`
   padding:20px;
   display: flex;
   width:80%;
+  height:2000px;
   margin : 0 auto;
 `
 
 const Wrapper = styled.div`
-  width:80%;
+  width:75%;
 `
 

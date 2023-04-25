@@ -1,7 +1,7 @@
 import { category, clothes } from "../../../data/data"
 import Clothes from "./Clothes";
 import styled from "styled-components";
-import Header from "./header";
+import Header from "./clothesListheader";
 import { useEffect } from "react";
 import { clothesType } from "../../../data/dataType";
 

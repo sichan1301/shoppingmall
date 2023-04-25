@@ -27,10 +27,9 @@ export default Cateogry
 
 
 const Container = styled.div`
-  width:20%;
+  width:25%;
   margin-right:30px;
-
-
+  
   p{
     background-color: #fff;
     padding:10px;

@@ -7,7 +7,7 @@ interface HeaderProps {
   setCurrentPriceSort(value:string):void
 }
 
-const Header = ({filteredClothesList,currentPriceSort,setCurrentPriceSort}:HeaderProps) => {
+const ClothesListHeader = ({filteredClothesList,currentPriceSort,setCurrentPriceSort}:HeaderProps) => {
 
   const handleChange = (e:React.ChangeEvent <HTMLSelectElement>) => {
     setCurrentPriceSort(e.target.value)
@@ -26,7 +26,7 @@ const Header = ({filteredClothesList,currentPriceSort,setCurrentPriceSort}:Heade
 }
 
 
-export default Header
+export default ClothesListHeader
 
 const Container = styled.header`
   height:50px;
