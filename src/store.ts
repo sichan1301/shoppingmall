@@ -26,6 +26,9 @@ const basket = createSlice({
   },
   reducers: {
     Add:(state:stateType,action) => {
+      state.totalPrice = 0
+      state.totalCount = 0
+
       const filteredIndex = state.basket.findIndex(item => item.id === action.payload.productInfo.id && item.size === action.payload.productInfo.size)
 
       filteredIndex === -1 
@@ -33,7 +36,7 @@ const basket = createSlice({
       : state.basket[filteredIndex].count += Number(action.payload.productInfo.count)
 
       for(let i =0;i<state.basket.length;i++){
-        state.totalCount += state.basket[i].count
+        state.totalCount +=  Number(state.basket[i].count)
       }
       
       for(let i = 0;i<state.basket.length;i++){
@@ -42,14 +45,22 @@ const basket = createSlice({
     
     },
     Delete:(state:stateType,action)=>{
+      state.totalPrice = 0
+      state.totalCount = 0
+
       const filteredIndex = state.basket.findIndex(item => item.id === action.payload.id && item.size === action.payload.size)
       state.basket.splice(filteredIndex,1)
+
+      for(let i =0;i<state.basket.length;i++){
+        state.totalCount += Number(state.basket[i].count)
+      }
 
       for(let i = 0;i<state.basket.length;i++){
         state.totalPrice +=  state.basket[i].price *  state.basket[i].count
       }
     },
     CountUpdate:(state:stateType,action) => {
+      state.totalPrice = 0
       const index = state.basket.findIndex(item => item.id === action.payload.id)
       state.basket[index].count = action.payload.count
 

@@ -62,8 +62,8 @@ const ClothesDetail = () => {
 
         <ColorList >
           {filteredClothes.color.map(item => (<div key ={uuidv4()}>
-            <input type="radio" name="color" id={item} value={item} onChange = {handleChangeOption} />
-            <label htmlFor={item}><span></span></label>
+            <ColorInput type="radio" name="color" id={item} value={item} onChange = {handleChangeOption} />
+            <label htmlFor={item}><ColorSpan>{item}</ColorSpan></label>
           </div>))}
         </ColorList> 
     
@@ -71,8 +71,8 @@ const ClothesDetail = () => {
 
         <SizeList>
           {filteredClothes.size.map(item => (<div key={uuidv4()}>
-            <input type="radio" name="size" id={item} value={item} onChange = {handleChangeOption} />
-            <label htmlFor={item}>{item}</label>
+            <SizeInput type="radio" name="size" id={item} value={item} onChange = {handleChangeOption} />
+            <label className="sizeLabel" htmlFor={item}><SizeSpan>{item}</SizeSpan></label>
           </div>))}
         </SizeList>
 
@@ -140,39 +140,43 @@ const Color = styled.p`
 const ColorList = styled.div`
   margin:0 0 20px 0;
   display: flex;
-  input{
+`
 
-  }
-  
-  label{
+const ColorSpan = styled.span`
+  margin-right:20px;
+`
 
-  }
+const ColorInput= styled.input.attrs({type:'radio'})`
+  display: none;
+  &:checked+${ColorSpan} {
+    background:rgb(0,0,0);
+    color:#fff;
+  }  
 `
 
 const SizeList = styled.div`
   margin:0 0 20px 0;
   display: flex;
-  input{
-    padding:10px;
-    
-    :disabled{
-      border:1px solid red;
-      background-color: red;
-    }
-    display: none;
-  }
-
-  label{  
-    padding:10px;
-    font-weight: 900;
-    border:1px solid grey;
-    border-radius: 5px;
-    :checked{
-      
-      border:1px solid red;
-    }
-  }
 `
+
+const SizeSpan= styled.span`
+  cursor:pointer;
+  padding:10px;
+  font-weight: 900;
+  border:1px solid grey;
+  border-radius: 5px;
+  margin-right:10px;
+`
+
+const SizeInput= styled.input.attrs({type:'radio'})`
+  display: none;
+  &:checked + ${SizeSpan} {
+    background:rgb(0,0,0);
+    color:#fff;
+  }  
+`
+
+
 
 const BasketArea = styled.div`
   display: flex;

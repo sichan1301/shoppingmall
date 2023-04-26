@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import styled from "styled-components"
 import { basketType, CountUpdate, Delete } from "../../store"
@@ -11,14 +11,18 @@ interface ItemProps {
 const Item = ({item}:ItemProps) => {
   const dispatch = useDispatch()
   const [selectCount,setSelectCount] = useState(item.count)
-  const handleSelectChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectCount(Number(e.target.value))
-    dispatch(CountUpdate({id:item.id,count:item.count}))
-  }
+  // const handleSelectChange = useCallback((e:React.ChangeEvent<HTMLSelectElement>) => {
+  //   setSelectCount(Number(e.target.value))
+  //   dispatch(CountUpdate({id:item.id,count:selectCount}))
+  // },[selectCount])
 
   const handleQuitClick = () => {
     dispatch(Delete({id:item.id,size:item.size}))
   }
+
+  useEffect(()=>{
+    dispatch(CountUpdate({id:item.id,count:selectCount}))
+  },[selectCount])
 
   return(
     <Container>
@@ -40,7 +44,7 @@ const Item = ({item}:ItemProps) => {
         <Wrapper>
           <Option>사이즈:{item.size}</Option>
           <Option>{item.price}원</Option>
-          <Count value ={selectCount} onChange= {handleSelectChange}>
+          <Count value ={selectCount} onChange= {(e)=>{setSelectCount(Number(e.target.value))}}>
             <option value={1}>1</option>
             <option value={2}>2</option>
             <option value={3}>3</option>
