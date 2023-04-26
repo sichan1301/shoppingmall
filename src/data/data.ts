@@ -6,7 +6,7 @@ export const category:string[] = ["전체","셔츠", "바지", "아우터"]
 export const color:string[] = [""]
 export const clothes:clothesType[] =  [
   {
-    id:uuidv4(),
+    id:"1",
     name:"메탈 벤트 테크 숏슬리브 셔츠 2.0",
     price:58000,
     imgSrc : "shirts.jpg",
@@ -15,7 +15,7 @@ export const clothes:clothesType[] =  [
     size:["XS","S","M","L","XL","XXL"]
   },
   {
-    id:uuidv4(),
+    id:"2",
     name:"ABC 풀온 팬츠 27",
     price:18400,
     imgSrc : "pants.jpg",
@@ -24,7 +24,7 @@ export const clothes:clothesType[] =  [
     size:["M","L","XL","XXL"]
   },
   {
-    id:uuidv4(),
+    id:"3",
     name:"다운 포 잇 올 베스트",
     price:139000,
     imgSrc : "jacket.jpg",
@@ -34,7 +34,7 @@ export const clothes:clothesType[] =  [
   },
   
   {
-    id:uuidv4(),
+    id:"4",
     name:"밸런서 숏슬리브 셔츠",
     price:109000,
     imgSrc : "shirts2.jpg",
@@ -43,7 +43,7 @@ export const clothes:clothesType[] =  [
     size:["XS","S","M","L","XL","XXL"]
   },
   {
-    id:uuidv4(),
+    id:"5",
     name:"릴랙스드 테이퍼드 트라우저",
     price:29000,
     imgSrc : "pants2.jpg",
@@ -52,7 +52,7 @@ export const clothes:clothesType[] =  [
     size:["M","L","XL","XXL"]
   },
   {
-    id:uuidv4(),
+    id:"6",
     name:"패스트 앤 프리 재킷",
     price:198000,
     imgSrc : "jacket2.jpg",
@@ -61,7 +61,7 @@ export const clothes:clothesType[] =  [
     size:["0","2","4","6","8","10","12"]
   },
   {
-    id:uuidv4(),
+    id:"7",
     name:"앳 이즈 후디",
     price:139000,
     imgSrc : "shirts3.jpg",
@@ -70,7 +70,7 @@ export const clothes:clothesType[] =  [
     size:["XS","S","M","L","XL","XXL"]
   },
   {
-    id:uuidv4(),
+    id:"8",
     name:"ABC 스키니 핏 조거 Warpstreme 온라인 한정",
     price:184000,
     imgSrc : "pants3.jpg",
@@ -79,7 +79,7 @@ export const clothes:clothesType[] =  [
     size:["M","L","XL","XXL"]
   },
   {
-    id:uuidv4(),
+    id:"9",
     name:"프리시피테이션 재킷",
     price:99000,
     imgSrc : "jacket3.jpg",

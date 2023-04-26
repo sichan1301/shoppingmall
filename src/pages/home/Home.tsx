@@ -1,25 +1,16 @@
-import { useEffect, useMemo, useState } from "react"
+import { useState } from "react"
 import styled from "styled-components"
-import { clothes } from "../../data/data"
 import Cateogry from "./Category"
 import ClothesList from "./clothesList/ClothesList"
-import Header from "./clothesList/clothesListheader"
 
 const Home = () => {
   const [currentCategory,setCurrentCategory] = useState("전체")
-  const [currentPriceSort,setCurrentPriceSort] = useState("가격 높은순")
-  const filteredClothesList = useMemo(()=>
-    clothes.filter(item => (currentCategory === "전체" ? true : item.category === currentCategory) && (currentPriceSort === "가격 높은순" ? clothes.sort((a,b) => b.price-a.price) : clothes.sort((a,b)=> a.price-b.price)))
-    ,[currentCategory,currentPriceSort]) 
 
   return(
     <Main>
       <Container>
         <Cateogry setCurrentCategory = {setCurrentCategory} />
-        <Wrapper>
-          <Header currentPriceSort ={currentPriceSort} filteredClothesList={filteredClothesList} setCurrentPriceSort={setCurrentPriceSort}/>
-          <ClothesList filteredClothesList={filteredClothesList} />
-        </Wrapper>
+        <ClothesList currentCategory={currentCategory} />
       </Container>
     </Main>
   )

@@ -6,7 +6,7 @@ import { clothes } from "../../data/data"
 import BasketModal from "./BasketModal"
 import SizeAlert from "./SizeAlert";
 import { useDispatch } from "react-redux";
-import { ADD } from "../../store";
+import { Add } from "../../store";
 
 export interface clothesOptionType {
   color:string,
@@ -30,25 +30,25 @@ const ClothesDetail = () => {
   const handleBasketClick = () => {
     if(clothesOption.size !==null){
       const productInfo = {...filteredClothes,...clothesOption}
-      dispatch(ADD({productInfo}))
+      dispatch(Add({productInfo}))
       setIsDisplayingModal(true)
+    }else{
+      setIsDisplayingSizeAlert(true)
     }
   }
 
   const handleChangeOption = useCallback((e:React.ChangeEvent <HTMLInputElement | HTMLSelectElement>) => {
     if((e.target as HTMLInputElement).checked === true || (e.target as HTMLSelectElement).name === "count"){
       setClothesOption({...clothesOption,[e.target.name]:e.target.value})
-    }else if((e.target as HTMLInputElement).name === "size"){
-      setIsDisplayingSizeAlert(false)
     }else{
       return
     }
   },[clothesOption])
 
-  
   useEffect(()=>{
+    clothesOption.size!== null && setIsDisplayingSizeAlert(false)
     console.log(clothesOption)
-  },[clothesOption])
+  },[clothesOption.size])
 
 
   return(
@@ -63,8 +63,8 @@ const ClothesDetail = () => {
         <ColorList >
           {filteredClothes.color.map(item => (<div key ={uuidv4()}>
             <input type="radio" name="color" id={item} value={item} onChange = {handleChangeOption} />
-            <label htmlFor={item}><span>{item}</span></label>
-            </div>))}
+            <label htmlFor={item}><span></span></label>
+          </div>))}
         </ColorList> 
     
         {isDisplayingSizeAlert && <SizeAlert /> }
@@ -72,7 +72,7 @@ const ClothesDetail = () => {
         <SizeList>
           {filteredClothes.size.map(item => (<div key={uuidv4()}>
             <input type="radio" name="size" id={item} value={item} onChange = {handleChangeOption} />
-            <label htmlFor={item}><span>{item}</span></label>
+            <label htmlFor={item}>{item}</label>
           </div>))}
         </SizeList>
 
@@ -139,11 +139,39 @@ const Color = styled.p`
 
 const ColorList = styled.div`
   margin:0 0 20px 0;
+  display: flex;
+  input{
+
+  }
+  
+  label{
+
+  }
 `
 
 const SizeList = styled.div`
   margin:0 0 20px 0;
+  display: flex;
+  input{
+    padding:10px;
+    
+    :disabled{
+      border:1px solid red;
+      background-color: red;
+    }
+    display: none;
+  }
 
+  label{  
+    padding:10px;
+    font-weight: 900;
+    border:1px solid grey;
+    border-radius: 5px;
+    :checked{
+      
+      border:1px solid red;
+    }
+  }
 `
 
 const BasketArea = styled.div`

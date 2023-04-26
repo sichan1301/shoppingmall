@@ -3,14 +3,15 @@ import { clothesType } from "../../../data/dataType"
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
 
-interface ClothesProps extends clothesType{
-  id:string
+interface ClothesProps{
+  id:string,
+  name:string,
+  price:number,
+  imgSrc:string
 }
 
 const Clothes = ({id,name,price,imgSrc}:ClothesProps) => {
-  useEffect(()=>{
-    console.log(id)
-  },[])
+
   return(
     <Link to={`/detail/${id}`}>
       <Container>

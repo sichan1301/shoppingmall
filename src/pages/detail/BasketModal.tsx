@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { clothesType } from "../../data/dataType"
+import { RootState } from "../../store"
 import { clothesOptionType } from "./ClothesDetail"
 
 interface BasketModalProps {
@@ -10,6 +12,7 @@ interface BasketModalProps {
 }
 
 const BasketModal = ({setIsDisplayingModal,filteredClothes,clothesOption}:BasketModalProps) => {
+  const {totalCount,totalPrice} = useSelector((state:RootState) => state)
 
   const handleButtonClick = () => {
     setIsDisplayingModal(false)
@@ -19,15 +22,12 @@ const BasketModal = ({setIsDisplayingModal,filteredClothes,clothesOption}:Basket
     <Container>
       <Header>
         <h1>장바구니에 추가되었어요</h1>
-        <button onClick = {handleButtonClick}>X</button>
+        <button onClick = {handleButtonClick}>✕</button>
       </Header>
       
       <Wrapper>
         <InfoArea>
           <Image src = {`/image/${filteredClothes.imgSrc}`} /> 
-
-
-          {/* 임시이미지임 바꿀것 */}
           <div>
             <Title>{filteredClothes.name}</Title>
             <Option>컬러: {clothesOption.color}</Option>
@@ -38,10 +38,9 @@ const BasketModal = ({setIsDisplayingModal,filteredClothes,clothesOption}:Basket
         </InfoArea>
 
         <PriceArea>
-          <Option> 5개 제품</Option> 
-          <Option>금액 830,000원</Option>
-          {/* store 완성되면 고칠 것  */}
-          
+          <Option>{totalCount}개 제품</Option> 
+          <Option>금액 {totalPrice}원</Option>
+    
           <StyledLink to ="/basket">장바구니 보기</StyledLink>
           <Shopping onClick ={handleButtonClick}>쇼핑 계속하기</Shopping>
         </PriceArea>
