@@ -1,18 +1,20 @@
 import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import styled from "styled-components"
-import { clothesType } from "../../data/dataType"
-import { RootState } from "../../store"
-import { clothesOptionType } from "./ClothesDetail"
+import { clothes } from "../../../data/data"
+import { clothesType } from "../../../data/dataType"
+import { RootState } from "../../../store"
+import { clothesOptionType } from "../ClothesDetail"
 
 interface BasketModalProps {
   setIsDisplayingModal(value:boolean):void,
-  filteredClothes:clothesType,
   clothesOption:clothesOptionType
 }
 
-const BasketModal = ({setIsDisplayingModal,filteredClothes,clothesOption}:BasketModalProps) => {
+const BasketModal = ({setIsDisplayingModal,clothesOption}:BasketModalProps) => {
   const {totalCount,totalPrice} = useSelector((state:RootState) => state)
+  const clothId = useParams().id
+  const filteredClothes = clothes.filter(item => item.id === clothId)[0]
 
   const handleButtonClick = () => {
     setIsDisplayingModal(false)
@@ -51,6 +53,7 @@ const BasketModal = ({setIsDisplayingModal,filteredClothes,clothesOption}:Basket
 export default BasketModal
 
 const Container = styled.div`
+  z-index:100;
   position:fixed;
   top:50%;
   left:50%;

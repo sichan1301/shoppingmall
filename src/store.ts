@@ -26,40 +26,34 @@ const basket = createSlice({
   },
   reducers: {
     Add:(state:stateType,action) => {
-      state.totalPrice = 0
-      state.totalCount = 0
-
       const filteredIndex = state.basket.findIndex(item => item.id === action.payload.productInfo.id && item.size === action.payload.productInfo.size)
 
       filteredIndex === -1 
-      ? state.basket.push(action.payload.productInfo) 
-      : state.basket[filteredIndex].count += Number(action.payload.productInfo.count)
+      ?state.basket.push(action.payload.productInfo) 
+      :state.basket[filteredIndex].count += Number(action.payload.productInfo.count)
       
-      state.basket.map(item => state.totalCount += Number(item.count))
-      state.basket.map(item => state.totalPrice += item.price * Number(item.count))
-    
+      state.totalCount += Number(action.payload.productInfo.count)
+      state.totalPrice += Number(action.payload.productInfo.count) * action.payload.productInfo.price
     },
+
     Delete:(state:stateType,action)=>{
-      state.totalPrice = 0
-      state.totalCount = 0
-
       const filteredIndex = state.basket.findIndex(item => item.id === action.payload.id && item.size === action.payload.size)
+      state.totalCount -= Number(state.basket[filteredIndex].count)
+      state.totalPrice -= state.basket[filteredIndex].price * Number(state.basket[filteredIndex].count)
       state.basket.splice(filteredIndex,1)
-
-      state.basket.map(item => state.totalCount += Number(item.count))
-      state.basket.map(item => state.totalPrice += item.price * Number(item.count))
-    
     },
+
     CountUpdate:(state:stateType,action) => {
       state.totalPrice = 0
       state.totalCount = 0
 
       const filteredIndex =state.basket.findIndex(item => item.id === action.payload.id)
-      state.basket[filteredIndex].count = action.payload.count
+      state.basket[filteredIndex].count = Number(action.payload.count)
 
       state.basket.map(item => state.totalCount += Number(item.count))
       state.basket.map(item => state.totalPrice += item.price * Number(item.count))
-  
+      
+      console.log(state.totalCount)
     }
   },
 })

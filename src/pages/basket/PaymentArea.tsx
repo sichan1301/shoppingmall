@@ -17,10 +17,12 @@ const PaymentArea = () => {
         <p>금액</p>
         <p>{totalPrice}</p>
       </Wrapper>
+      
       <Wrapper>
         <p>배송비</p>
         <p>무료</p>
       </Wrapper>
+
       <Wrapper>
         <p>결제금액</p>
         <p>{totalPrice}</p>
