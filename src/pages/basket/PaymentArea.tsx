@@ -1,10 +1,16 @@
+import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import styled from "styled-components"
 import { RootState } from "../../store"
 
 const PaymentArea = () => {
-  const totalPrice = useSelector((state:RootState)=>state.totalPrice)
-  
+  const {totalPrice,totalCount} = useSelector((state:RootState)=>state)
+
+  useEffect(()=>{
+    console.log(totalCount);
+    console.log(totalPrice);
+  },[totalPrice,totalCount])
+
   return(
     <Container>
       <Wrapper>

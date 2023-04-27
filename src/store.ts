@@ -34,14 +34,9 @@ const basket = createSlice({
       filteredIndex === -1 
       ? state.basket.push(action.payload.productInfo) 
       : state.basket[filteredIndex].count += Number(action.payload.productInfo.count)
-
-      for(let i =0;i<state.basket.length;i++){
-        state.totalCount +=  Number(state.basket[i].count)
-      }
       
-      for(let i = 0;i<state.basket.length;i++){
-        state.totalPrice +=  state.basket[i].price * state.basket[i].count
-      }
+      state.basket.map(item => state.totalCount += Number(item.count))
+      state.basket.map(item => state.totalPrice += item.price * Number(item.count))
     
     },
     Delete:(state:stateType,action)=>{
@@ -51,22 +46,20 @@ const basket = createSlice({
       const filteredIndex = state.basket.findIndex(item => item.id === action.payload.id && item.size === action.payload.size)
       state.basket.splice(filteredIndex,1)
 
-      for(let i =0;i<state.basket.length;i++){
-        state.totalCount += Number(state.basket[i].count)
-      }
-
-      for(let i = 0;i<state.basket.length;i++){
-        state.totalPrice +=  state.basket[i].price *  state.basket[i].count
-      }
+      state.basket.map(item => state.totalCount += Number(item.count))
+      state.basket.map(item => state.totalPrice += item.price * Number(item.count))
+    
     },
     CountUpdate:(state:stateType,action) => {
       state.totalPrice = 0
-      const index = state.basket.findIndex(item => item.id === action.payload.id)
-      state.basket[index].count = action.payload.count
+      state.totalCount = 0
 
-      for(let i = 0;i<state.basket.length;i++){
-        state.totalPrice +=  state.basket[i].price *  state.basket[i].count
-      }
+      const filteredIndex =state.basket.findIndex(item => item.id === action.payload.id)
+      state.basket[filteredIndex].count = action.payload.count
+
+      state.basket.map(item => state.totalCount += Number(item.count))
+      state.basket.map(item => state.totalPrice += item.price * Number(item.count))
+  
     }
   },
 })

@@ -21,7 +21,7 @@ const ClothesDetail = () => {
   const filteredClothes = clothes.filter(item => item.id === clothId)[0]
   const [isDisplayingModal,setIsDisplayingModal] = useState(false)
   const [isDisplayingSizeAlert,setIsDisplayingSizeAlert] = useState(false)
-  const [clothesOption,setClothesOption] = useState({
+  const [clothesOption,setClothesOption] = useState<clothesOptionType>({
     color:filteredClothes.color[0],
     size:null,
     count:1
@@ -48,7 +48,7 @@ const ClothesDetail = () => {
   useEffect(()=>{
     clothesOption.size!== null && setIsDisplayingSizeAlert(false)
     console.log(clothesOption)
-  },[clothesOption.size])
+  },[clothesOption])
 
 
   return(
