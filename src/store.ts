@@ -1,4 +1,4 @@
-import { configureStore, createSlice, current } from '@reduxjs/toolkit'
+import { configureStore, createSlice } from '@reduxjs/toolkit'
 
 export interface basketType {
   category:string,
@@ -26,7 +26,7 @@ const basket = createSlice({
   },
   reducers: {
     Add:(state:stateType,action) => {
-      const filteredIndex = state.basket.findIndex(item => item.id === action.payload.productInfo.id && item.size === action.payload.productInfo.size)
+      const filteredIndex = state.basket.findIndex(item => item.id === action.payload.productInfo.id && item.size === action.payload.productInfo.size && item.color === action.payload.productInfo.color) 
 
       filteredIndex === -1 
       ?state.basket.push(action.payload.productInfo) 
@@ -47,13 +47,13 @@ const basket = createSlice({
       state.totalPrice = 0
       state.totalCount = 0
 
-      const filteredIndex =state.basket.findIndex(item => item.id === action.payload.id)
+      const filteredIndex = state.basket.findIndex(item => item.id === action.payload.id)
       state.basket[filteredIndex].count = Number(action.payload.count)
 
       state.basket.map(item => state.totalCount += Number(item.count))
       state.basket.map(item => state.totalPrice += item.price * Number(item.count))
       
-      console.log(state.totalCount)
+      
     }
   },
 })

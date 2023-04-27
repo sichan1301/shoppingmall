@@ -17,7 +17,6 @@ const ClothesDetail = () => {
   const clothId = useParams().id
   const filteredClothes = clothes.filter(item => item.id === clothId)[0]
 
-  
   const [isDisplayingSizeAlert,setIsDisplayingSizeAlert] = useState(false)
   const [clothesOption,setClothesOption] = useState<clothesOptionType>({
     color:filteredClothes.color[0],
@@ -35,14 +34,6 @@ const ClothesDetail = () => {
       return
     }
   },[clothesOption])
-
-  // const handleChangeOption = useCallback((e:React.ChangeEvent <HTMLInputElement | HTMLSelectElement>) => {
-  //   if((e.target as HTMLInputElement).checked === true || (e.target as HTMLSelectElement).name === "count"){
-  //     setClothesOption({...clothesOption,[e.target.name]:e.target.value})
-  //   }else{
-  //     return
-  //   }
-  // },[clothesOption])
 
   useEffect(()=>{
     clothesOption.size !== null && setIsDisplayingSizeAlert(false)
@@ -89,15 +80,16 @@ const Container = styled.div`
 `
 
 const Img = styled.img`
-  width:650px;
+  width:45%;
   height:800px;
 `
 
 const ClothesInfo = styled.div`
+  width:55%;
   display:flex;
   flex-direction: column;
   justify-content: center;
-  margin-left:30px;  
+  margin-left:50px;  
   padding:20px;
 `
 

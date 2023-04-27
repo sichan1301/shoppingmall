@@ -1,5 +1,10 @@
 import styled from "styled-components"
 import { clothesType } from "../../../data/dataType"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBasketShopping } from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from "react-redux"
+import { RootState } from "../../../store"
+import { Link } from "react-router-dom"
 
 interface HeaderProps {
   filteredClothesList:clothesType[],
@@ -8,7 +13,7 @@ interface HeaderProps {
 }
 
 const ClothesListHeader = ({filteredClothesList,currentPriceSort,setCurrentPriceSort}:HeaderProps) => {
-
+  const totalCount = useSelector((state:RootState)=>state.totalCount)
   const handleChange = (e:React.ChangeEvent <HTMLSelectElement>) => {
     setCurrentPriceSort(e.target.value)
   }
@@ -21,10 +26,12 @@ const ClothesListHeader = ({filteredClothesList,currentPriceSort,setCurrentPrice
         <option value ="가격 높은순">가격 높은순</option>
         <option value ="가격 낮은순">가격 낮은순</option>
       </Select>
+      <Link to ="/basket">
+        <Icon count = {totalCount} icon={faBasketShopping} />
+      </Link>
     </Container>
   )
 }
-
 
 export default ClothesListHeader
 
@@ -53,3 +60,28 @@ const Select = styled.select`
   height:30px;
   margin-left:10px;
 `
+
+
+interface IconProps {
+  count:number
+}
+
+const Icon = styled(FontAwesomeIcon)<IconProps>`
+  color: black;
+  font-size: 30px;
+  cursor: pointer;
+  margin: 0 10px;
+  /* position:relative;
+  :before{
+    position:absolute;
+    content:"";
+    width:10px;
+    height:10px;
+    font-size:10px;
+    border-radius: 50%;
+    top:0;
+    left:50%;
+    transform: translate(-50%);
+    background:rgb(0,0,0);
+  } */
+`;

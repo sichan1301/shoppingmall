@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
+import { Link } from "react-router-dom"
 import styled from "styled-components"
-import { basketType, CountUpdate, Delete } from "../../store"
+import { basketType, CountUpdate, Delete, RootState } from "../../store"
 
 interface ItemProps {
   item:basketType
@@ -11,52 +13,60 @@ interface ItemProps {
 const Item = ({item}:ItemProps) => {
   const dispatch = useDispatch()
   const [selectCount,setSelectCount] = useState(item.count)
-  // const handleSelectChange = useCallback((e:React.ChangeEvent<HTMLSelectElement>) => {
-  //   setSelectCount(Number(e.target.value))
-  //   dispatch(CountUpdate({id:item.id,count:selectCount}))
-  // },[selectCount])
+  const state = useSelector((state:RootState)=>state)
 
   const handleQuitClick = () => {
-    dispatch(Delete({id:item.id,size:item.size}))
+    dispatch(Delete({id:item.id,size:item.size,count:selectCount}))
+  
   }
 
   useEffect(()=>{
     dispatch(CountUpdate({id:item.id,count:selectCount}))
   },[selectCount])
 
+
   return(
     <Container>
-      <Img src = {`image/${item.imgSrc}`} />
+      <Link to = {`/detail/${item.id}`} >
+        <Img src = {`image/${item.imgSrc}`} />
+      </Link>
 
       <ItemInfo>
         <Wrapper>
-          <Name>{item.name}</Name>
+          <Link to = {`/detail/${item.id}`} >
+            <Name>{item.name}</Name>
+          </Link>
           <Quit onClick = {handleQuitClick}>✕</Quit>
         </Wrapper>
 
         <Wrapper>
-          <Option>{item.color}</Option>
-          <Option>가격</Option>
-          <Option>구매 수량</Option>
-          <Option>결제 금액</Option>
+          <Option>컬러:{item.color}</Option>
+          <Inner>
+            <Option>가격</Option>
+            <Option>구매 수량</Option>
+            <Option>결제 금액</Option>
+          </Inner>
         </Wrapper>
 
         <Wrapper>
           <Option>사이즈:{item.size}</Option>
-          <Option>{item.price}원</Option>
-          <Count value ={selectCount} onChange= {(e)=>{setSelectCount(Number(e.target.value))}}>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-            <option value={6}>6</option>
-            <option value={7}>7</option>
-            <option value={8}>8</option>
-            <option value={9}>9</option>
-            <option value={10}>10</option>
-          </Count>
-          <Option>{item.price * selectCount}원</Option>
+
+          <Inner>
+            <Option>{item.price}원</Option>
+            <Count value ={selectCount} onChange= {(e)=>{setSelectCount(Number(e.target.value))}}>
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+              <option value={6}>6</option>
+              <option value={7}>7</option>
+              <option value={8}>8</option>
+              <option value={9}>9</option>
+              <option value={10}>10</option>
+            </Count>
+            <Option>{item.price * selectCount}원</Option>
+          </Inner>
         </Wrapper>
       </ItemInfo>
     </Container>
@@ -87,6 +97,11 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `
+const Inner = styled.div`
+  display:flex;
+  align-items:center;
+  gap:40px;
+`
 
 const Img = styled.img`
   width:190px;
@@ -109,5 +124,5 @@ const Option = styled.p`
 
 const Count = styled.select`
   width:70px;
-    
+  height:40px;
 `
