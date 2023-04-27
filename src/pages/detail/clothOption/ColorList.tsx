@@ -2,19 +2,21 @@ import styled from "styled-components"
 import {v4 as uuidv4} from 'uuid';
 import { clothesType } from "../../../data/dataType";
 
+
 interface ColorListProps {
+  currentColor:string,
   handleChangeOption(e:React.ChangeEvent<HTMLInputElement>):void,
   filteredClothes:clothesType
 }
 
-const ColorList = ({handleChangeOption,filteredClothes}:ColorListProps) =>{
+const ColorList = ({handleChangeOption,filteredClothes,currentColor}:ColorListProps) =>{
 
   return(
     <Container>
-      {filteredClothes.color.map(item => (<>
-        <input type="radio" name="color" id={item} value={item} onChange = {handleChangeOption} />
+      {filteredClothes.color.map(item => (<div key={uuidv4()}>
+        <input type="radio" name="color" id={item} value={item} onChange = {handleChangeOption} checked={item === currentColor && true}/>
         <Label htmlFor={item}>{item}</Label>
-      </>))}
+      </div>))}
     </Container>
   )
 }

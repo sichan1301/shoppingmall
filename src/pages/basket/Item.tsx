@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
@@ -9,20 +8,21 @@ interface ItemProps {
   item:basketType
 }
 
-
 const Item = ({item}:ItemProps) => {
   const dispatch = useDispatch()
+  
   const [selectCount,setSelectCount] = useState(item.count)
-  const state = useSelector((state:RootState)=>state)
+  
 
   const handleQuitClick = () => {
     dispatch(Delete({id:item.id,size:item.size,count:selectCount}))
-  
   }
+
 
   useEffect(()=>{
     dispatch(CountUpdate({id:item.id,count:selectCount}))
   },[selectCount])
+
 
 
   return(
@@ -30,7 +30,6 @@ const Item = ({item}:ItemProps) => {
       <Link to = {`/detail/${item.id}`} >
         <Img src = {`image/${item.imgSrc}`} />
       </Link>
-
       <ItemInfo>
         <Wrapper>
           <Link to = {`/detail/${item.id}`} >
@@ -53,7 +52,7 @@ const Item = ({item}:ItemProps) => {
 
           <Inner>
             <Option>{item.price}원</Option>
-            <Count value ={selectCount} onChange= {(e)=>{setSelectCount(Number(e.target.value))}}>
+            <Count value ={item.count} onChange= {(e)=>{setSelectCount(Number(e.target.value))}}>
               <option value={1}>1</option>
               <option value={2}>2</option>
               <option value={3}>3</option>
@@ -65,19 +64,15 @@ const Item = ({item}:ItemProps) => {
               <option value={9}>9</option>
               <option value={10}>10</option>
             </Count>
-            <Option>{item.price * selectCount}원</Option>
+            <Option>{item.price * item.count}원</Option>
           </Inner>
         </Wrapper>
       </ItemInfo>
     </Container>
-    
   )
 }
 
 export default Item 
-
-
-
 
 const Container = styled.div`
   width:900px;

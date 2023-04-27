@@ -23,7 +23,6 @@ const ClothesDetail = () => {
     size:null,
     count:1
   })
-  
 
   const handleChangeOption = useCallback((e:React.ChangeEvent <HTMLInputElement | HTMLSelectElement>) => {
     if((e.target as HTMLInputElement).checked === true){
@@ -50,6 +49,7 @@ const ClothesDetail = () => {
         <Color>컬러: {clothesOption.color}</Color>
 
         <ColorList 
+          currentColor={clothesOption.color}
           handleChangeOption={handleChangeOption} 
           filteredClothes={filteredClothes}/>
 

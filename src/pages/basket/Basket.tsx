@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import {v4 as uuidv4} from 'uuid';
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
@@ -17,7 +18,7 @@ const Basket = () => {
     <Container>
       <ItemList>
         <Link to="/"><Home>홈으로 가기</Home></Link>
-        {basket.map((item:basketType) => <Item item={item}/>)}
+        {basket.map((item:basketType) => <Item key={uuidv4()} item={item}/>)}
       </ItemList>
       <PaymentArea />
     </Container>
