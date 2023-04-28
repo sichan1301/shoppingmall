@@ -1,7 +1,5 @@
 import styled from "styled-components"
-import { clothesType } from "../../../data/dataType"
 import { Link } from "react-router-dom"
-import { useEffect } from "react"
 
 interface ClothesProps{
   id:string,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
@@ -10,19 +10,19 @@ interface ItemProps {
 
 const Item = ({item}:ItemProps) => {
   const dispatch = useDispatch()
-  
   const [selectCount,setSelectCount] = useState(item.count)
   
-
   const handleQuitClick = () => {
-    dispatch(Delete({id:item.id,size:item.size,count:selectCount}))
+    dispatch(Delete(item))
   }
 
-
-  useEffect(()=>{
-    dispatch(CountUpdate({id:item.id,count:selectCount}))
+  const handleCountChange = useCallback((e:React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectCount(Number(e.target.value))
   },[selectCount])
-
+  
+  useEffect(()=>{
+    dispatch(CountUpdate({item:item, currentCount:selectCount}))
+  },[handleCountChange])
 
 
   return(
@@ -52,7 +52,7 @@ const Item = ({item}:ItemProps) => {
 
           <Inner>
             <Option>{item.price}원</Option>
-            <Count value ={item.count} onChange= {(e)=>{setSelectCount(Number(e.target.value))}}>
+            <Count value ={item.count} onChange= {handleCountChange}>
               <option value={1}>1</option>
               <option value={2}>2</option>
               <option value={3}>3</option>

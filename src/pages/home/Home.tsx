@@ -5,7 +5,6 @@ import ClothesList from "./clothesList/ClothesList"
 
 const Home = () => {
   const [currentCategory,setCurrentCategory] = useState("전체")
-
   return(
     <Main>
       <Container>
@@ -16,9 +15,7 @@ const Home = () => {
   )
 }
 
-
 export default Home
-
 
 const Main = styled.main`
   background-color: rgb(243, 239, 239);

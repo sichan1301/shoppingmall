@@ -10,10 +10,6 @@ import PaymentArea from "./PaymentArea"
 const Basket = () => {
   const basket = useSelector((state:RootState)=>state.basket)
 
-  useEffect(()=>{
-    console.log(basket);
-  },[basket])
-  
   return(
     <Container>
       <ItemList>

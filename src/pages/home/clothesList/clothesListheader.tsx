@@ -13,7 +13,9 @@ interface HeaderProps {
 }
 
 const ClothesListHeader = ({filteredClothesList,currentPriceSort,setCurrentPriceSort}:HeaderProps) => {
+
   const totalCount = useSelector((state:RootState)=>state.totalCount)
+  
   const handleChange = (e:React.ChangeEvent <HTMLSelectElement>) => {
     setCurrentPriceSort(e.target.value)
   }
@@ -26,9 +28,12 @@ const ClothesListHeader = ({filteredClothesList,currentPriceSort,setCurrentPrice
         <option value ="가격 높은순">가격 높은순</option>
         <option value ="가격 낮은순">가격 낮은순</option>
       </Select>
-      <Link to ="/basket">
-        <Icon count = {totalCount} icon={faBasketShopping} />
-      </Link>
+    
+      <LinkToBasket to ="/basket">
+        <Icon icon={faBasketShopping} totalCount = {totalCount} /> 
+        <BasketCount>{totalCount}</BasketCount>
+      </LinkToBasket>
+   
     </Container>
   )
 }
@@ -41,6 +46,7 @@ const Container = styled.header`
   display: flex;
   align-items: center;
   justify-content: end;
+  padding: 0 30px;
 `
 
 const Count = styled.span`
@@ -48,40 +54,44 @@ const Count = styled.span`
   font-weight: 900;
 `
 
-
 const Sort = styled.span`
   font-size: 18px;
   margin-left:10px;
 `
 
-
 const Select = styled.select`
   width:200px;
   height:30px;
-  margin-left:10px;
+  margin: 0 20px;
 `
 
+const LinkToBasket = styled(Link)`
+  position:relative;
+`
 
 interface IconProps {
-  count:number
+  totalCount:number
 }
 
 const Icon = styled(FontAwesomeIcon)<IconProps>`
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
   color: black;
   font-size: 30px;
   cursor: pointer;
   margin: 0 10px;
-  /* position:relative;
-  :before{
-    position:absolute;
-    content:"";
-    width:10px;
-    height:10px;
-    font-size:10px;
-    border-radius: 50%;
-    top:0;
-    left:50%;
-    transform: translate(-50%);
-    background:rgb(0,0,0);
-  } */
 `;
+
+const BasketCount = styled.span`
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  font-size: 10px;
+  font-weight: 800;
+  border-radius: 50%;
+  padding:4px 7px; 
+  background-color: #ff6d6d;
+  color: #fff;
+`

@@ -47,8 +47,8 @@ const basket = createSlice({
       state.totalPrice = 0
       state.totalCount = 0
 
-      const filteredIndex = state.basket.findIndex(item => item.id === action.payload.id)
-      state.basket[filteredIndex].count = Number(action.payload.count)
+      const filteredIndex = state.basket.findIndex(item => item.id === action.payload.item.id && item.size === action.payload.item.size && item.color === action.payload.item.color)
+      state.basket[filteredIndex].count = Number(action.payload.currentCount)
 
       state.basket.map(item => state.totalCount += Number(item.count))
       state.basket.map(item => state.totalPrice += item.price * Number(item.count))

@@ -12,6 +12,7 @@ interface BasketAreaProps {
   setIsDisplayingSizeAlert(value:boolean):void,
   filteredClothes:clothesType
 }
+
 const BasketArea = ({handleChangeOption,clothesOption,setIsDisplayingSizeAlert,filteredClothes}:BasketAreaProps) =>{
 
   const [isDisplayingModal,setIsDisplayingModal] = useState(false)

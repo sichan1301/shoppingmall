@@ -36,7 +36,6 @@ const ClothesDetail = () => {
 
   useEffect(()=>{
     clothesOption.size !== null && setIsDisplayingSizeAlert(false)
-    console.log(clothesOption)
   },[clothesOption.size])
 
   return(

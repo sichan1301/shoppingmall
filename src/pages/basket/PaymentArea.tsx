@@ -6,11 +6,6 @@ import { RootState } from "../../store"
 const PaymentArea = () => {
   const {totalPrice,totalCount} = useSelector((state:RootState)=>state)
 
-  // useEffect(()=>{
-  //   console.log(totalCount);
-  //   console.log(totalPrice);
-  // },[totalPrice,totalCount])
-
   return(
     <Container>
       <Wrapper>

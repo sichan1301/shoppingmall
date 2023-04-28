@@ -1,9 +1,7 @@
 import {clothesType} from './dataType';
-import {v4 as uuidv4} from 'uuid';
 
 export const category:string[] = ["전체","셔츠", "바지", "아우터"]
 
-export const color:string[] = [""]
 export const clothes:clothesType[] =  [
   {
     id:"1",
