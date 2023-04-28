@@ -24,13 +24,14 @@ const ClothesListHeader = ({filteredClothesList,currentPriceSort,setCurrentPrice
     <Container>
       <Count>{filteredClothesList.length}개 제품</Count>
       <Sort>정렬</Sort>
+      
       <Select onChange = {handleChange} value = {currentPriceSort}>
         <option value ="가격 높은순">가격 높은순</option>
         <option value ="가격 낮은순">가격 낮은순</option>
       </Select>
     
       <LinkToBasket to ="/basket">
-        <Icon icon={faBasketShopping} totalCount = {totalCount} /> 
+        <Icon icon={faBasketShopping}/> 
         <BasketCount>{totalCount}</BasketCount>
       </LinkToBasket>
    
@@ -69,11 +70,7 @@ const LinkToBasket = styled(Link)`
   position:relative;
 `
 
-interface IconProps {
-  totalCount:number
-}
-
-const Icon = styled(FontAwesomeIcon)<IconProps>`
+const Icon = styled(FontAwesomeIcon)`
   position:absolute;
   top:50%;
   left:50%;

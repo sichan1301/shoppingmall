@@ -1,6 +1,6 @@
-import {v4 as uuidv4} from 'uuid';
 import styled from "styled-components"
 import { clothesType } from "../../../data/dataType";
+import {v4 as uuidv4} from 'uuid';
 
 
 interface SizeListProps {
@@ -14,11 +14,11 @@ const SizeList = ({handleChangeOption,filteredClothes}:SizeListProps) =>{
     <>
       <Title>US 사이즈</Title>
       <Wrapper>
-        {filteredClothes.size.map(item => (
-          <>
+        {filteredClothes.size.map((item,idx:number) => (
+          <div key={uuidv4()}>
             <SizeInput type="radio" name="size" id={item} value={item} onChange = {handleChangeOption} />
             <Label className="sizeLabel" htmlFor={item}>{item}</Label>
-          </>
+          </div>
         ))}
       </Wrapper>
     </>
@@ -48,7 +48,7 @@ const Label= styled.label`
 
 const SizeInput= styled.input`
   display: none;
-  &:checked +label{
+  &:checked + label{
     background:black;
     color:#fff;
     height:100%;
