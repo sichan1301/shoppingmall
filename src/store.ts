@@ -37,7 +37,7 @@ const basket = createSlice({
     },
 
     Delete:(state:stateType,action)=>{
-      const filteredIndex = state.basket.findIndex(item => item.id === action.payload.id && item.size === action.payload.size)
+      const filteredIndex = state.basket.findIndex(item => item.id === action.payload.id && item.size === action.payload.size && item.color === action.payload.color)
       state.totalCount -= Number(state.basket[filteredIndex].count)
       state.totalPrice -= state.basket[filteredIndex].price * Number(state.basket[filteredIndex].count)
       state.basket.splice(filteredIndex,1)
@@ -52,7 +52,6 @@ const basket = createSlice({
 
       state.basket.map(item => state.totalCount += Number(item.count))
       state.basket.map(item => state.totalPrice += item.price * Number(item.count))
-      
       
     }
   },

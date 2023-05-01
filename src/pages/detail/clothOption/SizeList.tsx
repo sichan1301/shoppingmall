@@ -15,7 +15,7 @@ const SizeList = ({handleChangeOption,filteredClothes}:SizeListProps) =>{
       <Title>US 사이즈</Title>
       <Wrapper>
         {filteredClothes.size.map((item,idx:number) => (
-          <div key={uuidv4()}>
+          <div key={idx}>
             <SizeInput type="radio" name="size" id={item} value={item} onChange = {handleChangeOption} />
             <Label className="sizeLabel" htmlFor={item}>{item}</Label>
           </div>

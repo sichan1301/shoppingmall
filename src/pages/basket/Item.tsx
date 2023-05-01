@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import { basketType, CountUpdate, Delete, RootState } from "../../store"
+import { basketType, CountUpdate, Delete } from "../../store"
 
 interface ItemProps {
   item:basketType
@@ -15,15 +15,14 @@ const Item = ({item}:ItemProps) => {
   const handleQuitClick = () => {
     dispatch(Delete(item))
   }
-
-  const handleCountChange = useCallback((e:React.ChangeEvent<HTMLSelectElement>) => {
+  
+  const handleCountChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
     setSelectCount(Number(e.target.value))
-  },[selectCount])
+  }
   
   useEffect(()=>{
-    dispatch(CountUpdate({item:item, currentCount:selectCount}))
-  },[handleCountChange])
-
+    dispatch(CountUpdate({item:item, currentCount:item.count}))
+  },[selectCount])
 
   return(
     <Container>
@@ -52,7 +51,7 @@ const Item = ({item}:ItemProps) => {
 
           <Inner>
             <Option>{item.price}원</Option>
-            <Count value ={item.count} onChange= {handleCountChange}>
+            <Count value ={selectCount} onChange= {handleCountChange}>
               <option value={1}>1</option>
               <option value={2}>2</option>
               <option value={3}>3</option>
