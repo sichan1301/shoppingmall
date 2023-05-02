@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import styled from "styled-components"
 import { clothes } from "../../data/data"
-import SizeAlert from "./clothOption/SizeAlert";
-import ColorList from "./clothOption/ColorList";
-import SizeList from "./clothOption/SizeList";
-import BasketArea from "./clothOption/BasketArea";
+import { Add } from "../../store";
+import { useDispatch } from "react-redux";
+import styled from "styled-components"
+import SizeAlert from "./clothesOption/SizeAlert";
+import ColorList from "./clothesOption/ColorList";
+import SizeList from "./clothesOption/SizeList";
+import BasketModal from "./BasketModal";
 
 export interface clothesOptionType {
   color:string,
@@ -14,10 +16,14 @@ export interface clothesOptionType {
 }
 
 const ClothesDetail = () => {
-  const clothId = useParams().id
-  const filteredClothes = clothes.filter(item => item.id === clothId)[0]
+  
+  const clothId = Number(useParams().id)
+  const filteredClothes = clothes[clothId-1]
 
+  const dispatch = useDispatch()
+  const [isDisplayingModal,setIsDisplayingModal] = useState(false)
   const [isDisplayingSizeAlert,setIsDisplayingSizeAlert] = useState(false)
+
   const [clothesOption,setClothesOption] = useState<clothesOptionType>({
     color:filteredClothes.color[0],
     size:null,
@@ -37,6 +43,17 @@ const ClothesDetail = () => {
   useEffect(()=>{
     clothesOption.size !== null && setIsDisplayingSizeAlert(false)
   },[clothesOption.size])
+
+
+  const handleBasketClick = () => {
+    if(clothesOption.size !==null){
+      const productInfo = {...filteredClothes,...clothesOption}
+      dispatch(Add({productInfo}))
+      setIsDisplayingModal(true)
+    }else{
+      setIsDisplayingSizeAlert(true)
+    }
+  }
 
   return(
     <Container>
@@ -58,13 +75,24 @@ const ClothesDetail = () => {
           handleChangeOption={handleChangeOption} 
           filteredClothes={filteredClothes}/>
 
-        <BasketArea 
-          handleChangeOption={handleChangeOption} 
-          filteredClothes={filteredClothes} 
-          clothesOption={clothesOption} 
-          setIsDisplayingSizeAlert ={setIsDisplayingSizeAlert} />
-
+        <BasketArea>
+            <Count onChange = {handleChangeOption} name = "count" value ={clothesOption.count}>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+            <option value={7}>7</option>
+            <option value={8}>8</option>
+            <option value={9}>9</option>
+            <option value={10}>10</option>
+          </Count>
+          <BasketButton onClick = {handleBasketClick}>장바구니에 추가 - {filteredClothes.price}원</BasketButton>
+        </BasketArea>
       </ClothesInfo>
+      
+      {isDisplayingModal && <BasketModal setIsDisplayingModal={setIsDisplayingModal} clothesOption={clothesOption}/>} 
     </Container>
   )
 }
@@ -106,4 +134,24 @@ const Price = styled.p`
 const Color = styled.p`
   margin:0 0 20px 0;
 
+`
+
+const BasketArea = styled.div`
+    display: flex;
+`
+
+const Count = styled.select`
+  width:50px;
+  height:50px;
+`
+
+const BasketButton = styled.button`
+  font-weight: 900;
+  font-size: 18px;
+  margin-left:10px;
+  color:#fff;
+  width:400px;
+  height:50px;
+  border-radius: 5px;
+  background-color: rgb(239, 51, 51);
 `

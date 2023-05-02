@@ -16,11 +16,11 @@ const ClothesList = ({currentCategory}:ClothesListProps) => {
     clothes.filter(item => (currentCategory === "전체" ? true : item.category === currentCategory) && (currentPriceSort === "가격 높은순" ? clothes.sort((a,b) => b.price-a.price) : clothes.sort((a,b)=> a.price-b.price)))
     ,[currentCategory,currentPriceSort]) 
 
-  return(
+    return(
     <Container>
       <ClothesListHeader currentPriceSort={currentPriceSort} filteredClothesList={filteredClothesList} setCurrentPriceSort={setCurrentPriceSort}/>
       <Wrapper>
-        {filteredClothesList.map(item => <Clothes key={item.id} {...item}/>)}   
+        {filteredClothesList.map(item => <Clothes key={item.id} {...item} />)}   
       </Wrapper>
     </Container>
   )

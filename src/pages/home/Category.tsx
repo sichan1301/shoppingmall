@@ -22,9 +22,7 @@ const Cateogry = ({setCurrentCategory}:CategoryProps) => {
   )
 }
 
-
 export default Cateogry
-
 
 const Container = styled.div`
   width:25%;

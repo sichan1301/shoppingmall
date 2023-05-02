@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import styled from "styled-components"
-import { clothesType } from "../../../data/dataType"
-import { Add } from "../../../store"
+import { clothesType } from "../../data/dataType"
+import { Add } from "../../store"
 import BasketModal from "./BasketModal"
-import { clothesOptionType } from "../ClothesDetail"
+import { clothesOptionType } from "./ClothesDetail"
 
 interface BasketAreaProps {
   handleChangeOption(e:React.ChangeEvent<HTMLSelectElement>):void,

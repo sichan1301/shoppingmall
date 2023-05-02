@@ -1,10 +1,9 @@
 import { useSelector } from "react-redux"
 import { Link, useParams } from "react-router-dom"
 import styled from "styled-components"
-import { clothes } from "../../../data/data"
-import { clothesType } from "../../../data/dataType"
-import { RootState } from "../../../store"
-import { clothesOptionType } from "../ClothesDetail"
+import { clothes } from "../../data/data"
+import { RootState } from "../../store"
+import { clothesOptionType } from "./ClothesDetail"
 
 interface BasketModalProps {
   setIsDisplayingModal(value:boolean):void,

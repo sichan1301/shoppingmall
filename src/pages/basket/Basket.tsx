@@ -5,9 +5,14 @@ import styled from "styled-components"
 import { basketType, RootState } from "../../store"
 import Item from "./Item"
 import PaymentArea from "./PaymentArea"
+import { useEffect } from 'react';
 
 const Basket = () => {
   const basket = useSelector((state:RootState)=>state.basket)
+
+  useEffect(() => {
+    console.log(`basket updated`);
+  }, [basket]);
 
   return(
     <Container>
@@ -31,7 +36,6 @@ const Container = styled.section`
   margin:0 auto;
   padding-top:100px;
   background-color: rgb(248, 247, 247);
-
 `
 
 const ItemList = styled.div`

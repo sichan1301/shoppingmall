@@ -10,19 +10,29 @@ interface ItemProps {
 
 const Item = ({item}:ItemProps) => {
   const dispatch = useDispatch()
-  const [selectCount,setSelectCount] = useState(item.count)
+  const [selectCount,setSelectCount] = useState(item.count);
   
   const handleQuitClick = () => {
     dispatch(Delete(item))
   }
-  
+  console.log('item', item); 
   const handleCountChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectCount(Number(e.target.value))
+    console.log(`handleCountChange`); 
+    setSelectCount(Number(e.target.value)) 
+    dispatch(CountUpdate({item:item, currentCount:Number(e.target.value)}))
   }
   
-  useEffect(()=>{
-    dispatch(CountUpdate({item:item, currentCount:item.count}))
-  },[selectCount])
+  // useEffect(()=>{
+  //   console.log('useEffect'); 
+  //   dispatch(CountUpdate({item:item, currentCount:selectCount}))
+  // },[selectCount])
+
+  useEffect(() => {
+    console.log(`rendered`);
+    return () => {
+      console.log(`destroy`);
+    }
+  }, []);
 
   return(
     <Container>
