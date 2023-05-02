@@ -30,7 +30,6 @@ export const clothes:clothesType[] =  [
     color:["Pink Peony"],
     size:["0","2","4","6","8","10","12"]
   },
-  
   {
     id:"4",
     name:"밸런서 숏슬리브 셔츠",
@@ -84,6 +83,6 @@ export const clothes:clothesType[] =  [
     category: "아우터",
     color:["Solar Orange","Black","Psychic"],
     size:["0","2","4","6","8","10","12"]
-  },
+  }
 
 ]
