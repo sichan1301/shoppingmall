@@ -9,7 +9,7 @@ interface ClothesProps{
 }
 
 const Clothes = ({id,name,price,imgSrc}:ClothesProps) => {
-
+  
   return(
     <Link to={`/detail/${id}`}>
       <Container>

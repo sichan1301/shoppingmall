@@ -16,10 +16,8 @@ export interface clothesOptionType {
 }
 
 const ClothesDetail = () => {
-  
+
   const clothId = Number(useParams().id)
-  console.log(clothId)
-  console.log(clothes[clothId-1])
   const filteredClothes = clothes[clothId-1]
 
   const dispatch = useDispatch()

@@ -46,17 +46,25 @@ const basket = createSlice({
     },
 
     CountUpdate:(state:stateType,action) => {
-      const totalValue = state.basket.reduce((acc,current)=>{
-        if(current.id === action.payload.item.id && current.size === action.payload.item.size && current.color === action.payload.item.color){
-          current.count = action.payload.currentCount
-        }
-        acc[0] += current.price * current.count
-        acc[1] += current.count
-        return acc;
-      },[0,0])
+      // const totalValue = state.basket.reduce((acc,current)=>{
+      //   if(current.id === action.payload.item.id && current.size === action.payload.item.size && current.color === action.payload.item.color){
+      //     current.count = action.payload.currentCount
+      //   }
+      //   acc[0] += current.price * current.count
+      //   acc[1] += current.count
+      //   return acc;
+      // },[0,0])
       
-      state.totalPrice = totalValue[0]
-      state.totalCount = totalValue[1]
+      // state.totalPrice = totalValue[0]
+      // state.totalCount = totalValue[1]
+      state.totalPrice = 0
+      state.totalCount = 0
+
+      const filteredIndex = state.basket.findIndex(item => item.id === action.payload.item.id && item.size === action.payload.item.size && item.color === action.payload.item.color)
+      state.basket[filteredIndex].count = Number(action.payload.currentCount)
+
+      state.basket.map(item => state.totalCount += Number(item.count))
+      state.basket.map(item => state.totalPrice += item.price * Number(item.count))
     } 
 
   },

@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { basketType, CountUpdate, Delete } from "../../store"
-import { log } from "console"
 
 interface ItemProps {
   item:basketType
@@ -12,29 +11,23 @@ interface ItemProps {
 const Item = ({item}:ItemProps) => {
   const dispatch = useDispatch()
   const [selectCount,setSelectCount] = useState(item.count);
-  
-  useEffect(()=>{
-    console.log("초기 렌더링");
-  },[])
-
-  const testFunction = () => {
-    console.log("testFunction")
-  }
 
   const handleQuitClick = () => {
     dispatch(Delete(item))
   }
   console.log('item', item); 
+
   const handleCountChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(`handleCountChange`); 
     setSelectCount(Number(e.target.value)) 
+    console.log(`handleCountChange`); 
     dispatch(CountUpdate({item:item, currentCount:Number(e.target.value)}))
   }
-  
+
   useEffect(()=>{
     console.log('useEffect'); 
-    dispatch(CountUpdate({item:item, currentCount:selectCount}))
-  },[selectCount])
+    dispatch(CountUpdate({item:item, currentCount:item.count}))
+  },[handleCountChange])
+
 
   useEffect(() => {
     console.log(`rendered`);

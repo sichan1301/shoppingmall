@@ -1,7 +1,5 @@
 import styled from "styled-components"
 import { clothesType } from "../../../data/dataType";
-import {v4 as uuidv4} from 'uuid';
-
 
 interface SizeListProps {
   handleChangeOption(e:React.ChangeEvent<HTMLInputElement>):void,
